@@ -1,41 +1,64 @@
-import React from "react"
+import React from "react";
 
-const PizzaForm = () => {
-  return(
-      <div className="form-row">
-        <div className="col-5">
-            <input type="text" className="form-control" placeholder="Pizza Topping" value={
-                //Pizza Topping Should Go Here
-                null
-              }/>
+export default function PizzaForm({
+  topping,
+  size,
+  vegetarian,
+  submitEdit,
+  onChange,
+}) {
+  return (
+    <form className="form-row" onSubmit={submitEdit}>
+      <div className="col-5">
+        <input
+          type="text"
+          className="form-control"
+          name="topping"
+          placeholder="Pizza Topping"
+          value={topping}
+          onChange={onChange}
+        />
+      </div>
+      <div className="col">
+        <select
+          value={size}
+          className="form-control"
+          name="size"
+          onChange={onChange}
+        >
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
+        </select>
+      </div>
+      <div className="col">
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            value="Vegetarian"
+            name="vegetarian"
+            checked={vegetarian}
+            onChange={onChange}
+          />
+          <label className="form-check-label">Vegetarian</label>
         </div>
-        <div className="col">
-          <select value={null} className="form-control">
-            <option value="Small">Small</option>
-            <option value="Medium">Medium</option>
-            <option value="Large">Large</option>
-          </select>
-        </div>
-        <div className="col">
-          <div className="form-check">
-            <input className="form-check-input" type="radio" value="Vegetarian" checked={null}/>
-            <label className="form-check-label">
-              Vegetarian
-            </label>
-          </div>
-          <div className="form-check">
-            <input className="form-check-input" type="radio" value="Not Vegetarian" checked={null}/>
-            <label className="form-check-label">
-              Not Vegetarian
-            </label>
-          </div>
-        </div>
-        <div className="col">
-          <button type="submit" className="btn btn-success" onClick={console.log}>Submit</button>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            value="Not Vegetarian"
+            name="vegetarian"
+            checked={topping ? (vegetarian ? false : true) : ""}
+          />
+          <label className="form-check-label">Not Vegetarian</label>
         </div>
       </div>
-
-  )
+      <div className="col">
+        <button type="submit" className="btn btn-success" disabled={!topping}>
+          Submit
+        </button>
+      </div>
+    </form>
+  );
 }
-
-export default PizzaForm
